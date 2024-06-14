@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+<!--    <link rel="stylesheet" href="recommend.css" />-->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/recommend.css') }}">
+    <title>Recommend Me!</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav__logo"><a href="/">Book.Finder</a></div>
+        <ul class="nav__links">
+          <li><a href="/" class="link">Home</a></li>
+          <li><a href="/recommend" class="link">Recommend</a></li>
+          <li><a href="/top50books" class="link">Top 50 Books</a></li>
+          <li><a href="#about-me" class="link">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<div class="main-container">
+
+      <div>
+        <h3 style="margin-left: 1rem; margin-top: 40px; color: #ccc;">Book Recommender System - Let us Suggest You a Book!</h3>
+      <form action="/recommend_books", method="post">
+        <div class="input-box">
+          <label class="input">
+            <input name="user_input" class="input__field" type="text" placeholder=" "/>
+            <span class="input__label">Enter Book Name...</span>
+          </label>
+          <div class="button-group">
+            <button type="submit">Send</button>
+          </div>
+        </div>
+      </form>
+      </div>
+
+
+      <!-- cards starts -->
+      <div class="wrapper">
+
+          <h2><strong>Recommended Books<span>( 5 )</span></strong></h2>
+
+
+          <div class="cards">
+
+
+          {% if data%}
+            {% for i in data %}
+              <div class="book-cover">
+                <figure class="card">
+                  <img src="{{i[2]}}" />
+                </figure>
+                <h3>{{i[0]}} </h3>
+                <h3>Author - {{i[1]}}</h3>
+              </div>
+            {% endfor %}
+          {% endif %}
+
+
+
+
+
+
+
+	        </div>
+      </div>
+      <!-- cards ends -->
+   
+</div>
+
+    
+
+    <footer class="footer" id="about-me">
+      <div class="container">
+       <div class="row">
+         <img src="assets/bg-1.jpg" alt="" style="height: 200px; width: 200px;">
+         <div class="footer-col">
+           <h4>Developed by:</h4>
+           <h2>Himanshu Banodha</h2>
+           <p>Data Science Intern at iNeuron.ai </p>
+           <ul>
+           </ul>
+         </div>
+         <div class="footer-col footer-col-2">
+           <h4>Connect with me:</h4>
+           <ul>
+             <li><a href="https://www.linkedin.com/in/himanshu-banodha/" target="_blank">linkedin</a></li>
+             <li><a href="https://github.com/himanshu-banodha" target="_blank">GitHub</a></li>
+             <li><a href="https://www.kaggle.com/himanshubanodha" target="_blank">Kaggle</a></li>
+           </ul>
+         </div>
+       </div>
+      </div>
+   </footer>
+  </body>
+  <script>
+    let timer;
+
+document.addEventListener('input', e => {
+  const el = e.target;
+  
+  if( el.matches('[data-color]') ) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      document.documentElement.style.setProperty(`--color-${el.dataset.color}`, el.value);
+    }, 100)
+  }
+})
+  </script>
+</html>
